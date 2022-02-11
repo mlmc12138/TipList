@@ -10,8 +10,10 @@
   "dependencies": {
     "@vant/use": "^1.3.5",
     "@vue/devtools-api": "^6.0.2",
+    "axios": "^0.25.0",
     "core-js": "^3.6.5",
     "default-passive-events": "^2.0.0",
+    "vant": "^3.4.4",
     "vue": "^3.0.0",
     "vue-router": "^4.0.12"
   },
