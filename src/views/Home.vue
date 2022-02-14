@@ -1,15 +1,8 @@
 <template>
   <div id="Home">
-    <van-sticky>
-      <van-search
-        shape="round"
-        placeholder="搜索便签"
-        background="#f2f3f5"
-        @search="onSearch"
-        v-model="value"
-      />
-    </van-sticky>
-    <tip-list :tipList="result" @deleteTip="removeTip"></tip-list>
+    <Header></Header>
+    <Search></Search>
+    <tip-list :tipList="tipComputed" @deleteTip="removeTip"></tip-list>
     <div class="addTip">
       <img src="../assets/img/addTip.svg" @click="addTip" alt="" />
     </div>
@@ -18,21 +11,50 @@
 </template>
 
 <script>
-import { ref } from "vue";
+import { ref, reactive, computed, toRefs, onMounted, toRaw } from "vue";
+
+// 组件
 import TipList from "./HomeChildren/TipList.vue";
+import Search from "./HomeChildren/Search.vue";
+import Header from "./HomeChildren/Header.vue";
+
+// 方法
 import { getTipList } from "../network/home";
 import { useRouter } from "vue-router";
+import store from "../stores/index";
 import axios from "axios";
+
 export default {
   name: "Home",
-  components: { TipList },
+  components: { TipList, Search, Header },
   setup(props) {
     let value = ref(null);
-    let result = ref(null);
-    const baseUrl = "/api";
-    getTipList().then((res) => {
-      result.value = res.data;
+      const state = reactive({
+      // 列表数据
+      result: [],
+      // 通过搜索框的值去筛选后的新列表数据
+      tipComputed: computed(() => {
+        // 判断是否输入框是否输入了筛选条件，如果没有返回原始的 news 数组
+        if (store.state.searchValue) {
+          return []
+        } else {
+          return state.result;
+        }
+      }),
+      searchValue: store.state
     });
+    const baseUrl = "/api";
+    const getList = () => {
+      getTipList().then((res) => {
+        state.result = res.data;
+      });
+    };
+    // 首页加载时执行
+    onMounted(() => {
+      getList();
+    });
+
+    // 路由相关
     const router = useRouter();
     const addTip = () => {
       router.push({
@@ -42,29 +64,22 @@ export default {
         },
       });
     };
-    const onSearch = () => {
-      router.replace({
-        path: "/search",
-      });
-    };
+
     const removeTip = (index) => {
       axios
         .post(baseUrl + "/deleteTip", {
           data: index,
         })
         .then(() => {
-          getTipList().then((res) => {
-            result.value = res.data;
-          });
+          getList();
         });
     };
     return {
-      result,
       getTipList,
       addTip,
-      onSearch,
-      value,
       removeTip,
+      value,
+      ...toRefs(state),
     };
   },
 };
@@ -73,6 +88,7 @@ export default {
 #Home {
   background-color: #f2f3f5;
 }
+
 .addTip img {
   position: fixed;
   right: 2%;

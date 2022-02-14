@@ -19,7 +19,9 @@
 </template>
 
 <script>
-import { useRouter,useRoute } from "vue-router";
+import { useRouter } from "vue-router";
+import { toRaw, computed, watch } from "vue";
+import store from "../../stores/index";
 export default {
   name: "TipList",
   props: {
@@ -28,9 +30,8 @@ export default {
       default: {},
     },
   },
-  setup(props,{emit}) {
+  setup(props, { emit }) {
     const router = useRouter();
-    const baseUrl = "/api";
     const showDetail = function (index) {
       router.push({
         path: "/detail",
@@ -40,7 +41,7 @@ export default {
       });
     };
     const deleteTip = (id) => {
-      emit("deleteTip",id)
+      emit("deleteTip", id);
     };
     return {
       showDetail,
@@ -67,6 +68,8 @@ ul li {
   /* 避免元素内部分裂 */
   -webkit-column-break-inside: avoid;
   padding: 3%;
+  max-height: 200px;
+  overflow: hidden;
 }
 .delete-button {
   height: 100%;
@@ -74,9 +77,14 @@ ul li {
 .delete {
   width: 20px;
   height: 100%;
-  color: red;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: red;
+  margin-left: 3px;
+}
+.delete p {
+  padding: 1rem;
 }
 </style>

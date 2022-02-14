@@ -2,7 +2,6 @@ import { createRouter,createWebHistory} from "vue-router";
 
 const Home = ()=> import('../views/Home.vue')
 const Wait = ()=> import('../views/Wait.vue')
-const Search = ()=> import('../views/Search.vue')
 const Detail = ()=> import('../views/Detail.vue')
 const Addtips = ()=> import('../views/Addtips.vue')
 const routes = [
@@ -16,14 +15,6 @@ const routes = [
     component: Home,
     meta: {
       isShow: true
-    }
-  },
-  {
-    path: '/search',
-    name: 'search',
-    component: Search,
-    meta: {
-      isShow: false
     }
   },
   {
