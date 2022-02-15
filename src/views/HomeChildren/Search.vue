@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { reactive, toRefs, watch } from "vue";
 import {useRouter} from  'vue-router'
 import store from "../../stores/index";

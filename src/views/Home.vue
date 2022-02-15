@@ -29,19 +29,26 @@ export default {
   components: { TipList, Search, Header },
   setup(props) {
     let value = ref(null);
-      const state = reactive({
+    const state = reactive({
       // 列表数据
       result: [],
+      // 搜索结果
+      nullResult: [],
+      // searchValue: store.state,
       // 通过搜索框的值去筛选后的新列表数据
       tipComputed: computed(() => {
         // 判断是否输入框是否输入了筛选条件，如果没有返回原始的 news 数组
         if (store.state.searchValue) {
-          return []
+          return state.result.filter((item) => {
+            if (item.title.indexOf(store.state.searchValue) >= 0) {
+              console.log(item);
+              return item;
+            }
+          });
         } else {
           return state.result;
         }
       }),
-      searchValue: store.state
     });
     const baseUrl = "/api";
     const getList = () => {
