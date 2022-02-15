@@ -35,8 +35,8 @@
     },
   };
 </script>
-<style scoped>
+<style>
   :root {
-    --van-dropdown-menu-background-color: #edeef0;
+    --van-dropdown-menu-background-color: #f2f3f5
   }
 </style>

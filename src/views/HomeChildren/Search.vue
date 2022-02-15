@@ -29,6 +29,8 @@ export default {
       },
       () => {
         store.setSearchValue(state.searchValue);
+        console.log(store.state.searchValue);
+        
       }
     );
     return {

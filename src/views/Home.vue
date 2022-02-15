@@ -6,7 +6,7 @@
     <div class="addTip">
       <img src="../assets/img/addTip.svg" @click="addTip" alt="" />
     </div>
-    <div style="height: 44px"></div>
+    <div style="height: auto"></div>
   </div>
 </template>
 
@@ -41,7 +41,7 @@ export default {
         if (store.state.searchValue) {
           return state.result.filter((item) => {
             if (item.title.indexOf(store.state.searchValue) >= 0) {
-              console.log(item);
+              // console.log(item);
               return item;
             }
           });
