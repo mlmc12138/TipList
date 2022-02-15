@@ -6,7 +6,7 @@
     <div class="addTip">
       <img src="../assets/img/addTip.svg" @click="addTip" alt="" />
     </div>
-    <div style="height: auto"></div>
+    <div style="height: 44px"></div>
   </div>
 </template>
 
