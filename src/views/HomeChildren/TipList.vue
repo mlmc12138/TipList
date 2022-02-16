@@ -62,7 +62,7 @@ ul {
 ul li {
   background-color: #ffffff;
   border-radius: 10px;
-  margin-bottom: 1vh;
+  margin-bottom: 2vh;
   /* 避免元素内部分裂 */
   -webkit-column-break-inside: avoid;
   padding: 3%;
