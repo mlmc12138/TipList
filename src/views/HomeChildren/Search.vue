@@ -12,14 +12,12 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import { reactive, toRefs, watch } from "vue";
-import {useRouter} from  'vue-router'
 import store from "../../stores/index";
 export default {
   name: "",
-  setup() {
-    const router = useRouter()
+  setup(props,{emit}) {
     const state = reactive({
       searchValue: "",
     });
@@ -29,8 +27,7 @@ export default {
       },
       () => {
         store.setSearchValue(state.searchValue);
-        console.log(store.state.searchValue);
-        
+        emit("goSearch")
       }
     );
     return {

@@ -1,7 +1,7 @@
 <template>
   <div id="Home">
     <Header></Header>
-    <Search></Search>
+    <Search @goSearch="onSearch"></Search>
     <tip-list :tipList="tipComputed" @deleteTip="removeTip"></tip-list>
     <div class="addTip">
       <img src="../assets/img/addTip.svg" @click="addTip" alt="" />
@@ -23,7 +23,7 @@ import { getTipList } from "../network/home";
 import { useRouter } from "vue-router";
 import store from "../stores/index";
 import axios from "axios";
-
+import debouce from "../hock/fangdong"
 export default {
   name: "Home",
   components: { TipList, Search, Header },
@@ -41,7 +41,6 @@ export default {
         if (store.state.searchValue) {
           return state.result.filter((item) => {
             if (item.title.indexOf(store.state.searchValue) >= 0) {
-              // console.log(item);
               return item;
             }
           });
@@ -50,6 +49,9 @@ export default {
         }
       }),
     });
+    const onSearch = ()=> {
+       debouce(getList(),500)
+    }
     const baseUrl = "/api";
     const getList = () => {
       getTipList().then((res) => {
@@ -87,6 +89,7 @@ export default {
       removeTip,
       value,
       ...toRefs(state),
+      onSearch
     };
   },
 };
