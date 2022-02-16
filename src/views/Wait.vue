@@ -1,26 +1,20 @@
 <template>
   <div>
-    <h1>正在搭建中。。。</h1>
-    <todo-list>
-
-    </todo-list>
+    <Header></Header>
+    <todolist></todolist>
   </div>
 </template>
 
 <script>
-import todolist from "../components/content/Wait/TodoList.vue"
-
+import todolist from "../components/content/Wait/TodoList.vue";
+import Header from "./HomeChildren/Header.vue"
 export default {
-  name: '',
-  computed: {todolist},
+  name: "",
+  components: { todolist, Header },
   setup() {
-    
-    return {
-    
-    }
+    return {};
   },
-}
-
+};
 </script>
 <style scoped>
 </style>

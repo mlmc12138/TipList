@@ -35,12 +35,6 @@ export default {
     .then((res)=>{
       data.value = res.data
     })
-    // axios.post(baseUrl+'/updateTip',{
-    //   data: data.value
-    // })
-    // .then((res)=>{
-      
-    // })
     return {
       route,
       data,
