@@ -1,7 +1,7 @@
 <template>
   <div id="TipList">
     <ul>
-      <li v-for="(item, id) in tipList" :key="id" @click="showDetail(id)">
+      <li v-for="(item, id) in tipList" :key="id" @click="showDetail(item.id)">
         <van-swipe-cell>
           <div>
             <h2>{{ item.title }}</h2>
@@ -20,8 +20,6 @@
 
 <script>
 import { useRouter } from "vue-router";
-import { toRaw, computed, watch } from "vue";
-import store from "../../stores/index";
 export default {
   name: "TipList",
   props: {
@@ -32,11 +30,11 @@ export default {
   },
   setup(props, { emit }) {
     const router = useRouter();
-    const showDetail = function (index) {
+    const showDetail = function (id) {
       router.push({
         path: "/detail",
         query: {
-          id: index,
+          id: id,
         },
       });
     };
