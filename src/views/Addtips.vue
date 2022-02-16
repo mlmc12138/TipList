@@ -44,10 +44,12 @@ export default {
 .title {
   border: none;
   font-size: 2rem;
+  background-color: #f2f3f5;
 }
 .content {
   border: none;
   width: 100%;
   height: 80vh;
+  background-color: #f2f3f5;
 }
 </style>
