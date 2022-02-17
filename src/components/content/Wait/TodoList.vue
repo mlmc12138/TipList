@@ -117,6 +117,7 @@ export default {
 }
 .list label input:checked + span{
   color: gainsboro;
+  text-decoration: line-through;
 }
 .list label input:checked::after {
   content: "";
