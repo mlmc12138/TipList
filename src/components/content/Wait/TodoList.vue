@@ -19,7 +19,7 @@
     </div>
     <div class="list">
       <label v-for="(item, index) in tipList" :key="index">
-        <input type="checkbox" />{{ item }}
+        <input type="checkbox" /><span>{{ item }}</span> 
       </label>
     </div>
     <div style="height: 44px"></div>
@@ -114,6 +114,9 @@ export default {
 .list label input:checked {
   text-decoration: line-through;
   background: #1673ff;
+}
+.list label input:checked + span{
+  color: gainsboro;
 }
 .list label input:checked::after {
   content: "";
